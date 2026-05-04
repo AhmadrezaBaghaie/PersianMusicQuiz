@@ -36,3 +36,6 @@ A web-based interactive quiz application designed to help users identify various
    python -m http.server 8000
    ```
 4. Open `http://localhost:8000` in your browser.
+
+## Live Demo
+Check out the live application here: [https://ahmadrezabaghaie.github.io/PersianMusicQuiz/](https://ahmadrezabaghaie.github.io/PersianMusicQuiz/)

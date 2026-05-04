@@ -31,6 +31,9 @@ A web-based quiz application for identifying Persian musical modes (Dastgah and 
 ## Running the Application
 Since the app fetches `data.json` locally, a local server is required to bypass CORS restrictions.
 
+### Live Demo
+View the live application here: [https://ahmadrezabaghaie.github.io/PersianMusicQuiz/](https://ahmadrezabaghaie.github.io/PersianMusicQuiz/)
+
 ### Using Python
 ```bash
 python -m http.server 8000
