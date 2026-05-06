@@ -1,5 +1,6 @@
 let musicData = [];
-let score = 0;
+let correctScore = 0;
+let totalAttempts = 0;
 let currentTrack = null;
 let autoTransitionTimer = null; // Timer reference
 
@@ -10,7 +11,12 @@ async function loadData() {
     // Add audio ended listener
     document.getElementById('audio-player').addEventListener('ended', handleAudioEnded);
     
+    updateScoreUI();
     nextQuestion();
+}
+
+function updateScoreUI() {
+    document.getElementById('score').innerText = `امتیاز: ${correctScore} از ${totalAttempts}`;
 }
 
 function handleAudioEnded() {
@@ -23,6 +29,9 @@ function handleAudioEnded() {
 }
 
 function showCorrectAnswer() {
+    totalAttempts++;
+    updateScoreUI();
+
     const feedback = document.getElementById('feedback');
     const fileName = currentTrack.file.split('/').pop().replace(/\.[^/.]+$/, "");
     
@@ -84,6 +93,8 @@ function checkAnswer(selected) {
         autoTransitionTimer = null;
     }
 
+    totalAttempts++;
+    
     const feedback = document.getElementById('feedback');
     const nextBtn = document.getElementById('next-btn');
     const fileName = currentTrack.file.split('/').pop().replace(/\.[^/.]+$/, "");
@@ -92,13 +103,13 @@ function checkAnswer(selected) {
     document.querySelectorAll('#options-container button').forEach(btn => btn.disabled = true);
 
     if (selected === currentTrack.artist) {
-        score++;
-        document.getElementById('score').innerText = `امتیاز: ${score}`;
+        correctScore++;
         feedback.innerHTML = `<p style="color: green;">درست! ${currentTrack.artist}<br>${fileName}</p>`;
     } else {
         feedback.innerHTML = `<p style="color: red;">نادرست. ${currentTrack.artist}<br>${fileName}</p>`;
     }
     
+    updateScoreUI();
     nextBtn.innerText = 'بعدی ▶';
     nextBtn.onclick = nextQuestion;
 }
