@@ -3,12 +3,18 @@
 A web-based interactive quiz application designed to help users identify various Persian musical modes (**Dastgah** and **Avaz**).
 
 ## Features
-- **Interactive Quiz**: Randomly selects audio clips for the user to identify.
+- **Interactive Quiz**: Randomly selects audio clips from a wide range of Persian musical modes.
 - **Visual Feedback**: Provides immediate visual confirmation if the selection is correct or incorrect.
-- **Full Playback**: Allows users to listen to the entire audio clip after making their choice.
-- **Manual Progression**: Users can progress through the quiz at their own pace using a manual "Next" button.
+- **Game Mechanics**:
+  - **Randomized Options**: Each question presents 4 randomized choices.
+  - **Reveal Logic**: Built-in "Don't know" (نمی‌دانم) functionality to reveal the correct answer.
+  - **Auto-Transition**: Automatically advances to the next question 5 seconds after the audio finishes.
 - **Localized UI**: Fully localized in Farsi for a seamless user experience.
 - **Responsive Design**: Mobile-friendly layout using CSS Grid and optimized typography.
+
+## Supported Modes
+The quiz currently includes tracks from the following Dastgahs and Avazes:
+- ابوعطا، افشاری، بیات اصفهان، بیات ترک، بیات کرد، چهارگاه، دشتی، راست پنجگاه، سه گاه، شور، ماهور، نوا، همایون.
 
 ## Technical Stack
 - **Frontend**: Vanilla JavaScript (ES6+), HTML5 Audio API.
@@ -17,8 +23,8 @@ A web-based interactive quiz application designed to help users identify various
 
 ## Project Structure
 - `index.html`: The main entry point.
-- `script.js`: Core game logic (loading data, handling interactions, managing scoring).
-- `style.css`: UI and layout definitions.
+- `script.js`: Core game logic (loading data, handling interactions, managing scoring, auto-transition).
+- `style.css`: UI and layout definitions (fixed-height interaction area for stability).
 - `data.json`: Database file mapping files to musical modes.
 - `tracks/`: Directory containing `.wav` audio files.
 
