@@ -81,11 +81,12 @@ h1 {
 
 /* Feedback & Next Button Area (Reserve space to prevent layout shift) */
 #interaction-area {
-    min-height: 120px;
+    min-height: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
     margin-top: 0.5rem;
 }
 
