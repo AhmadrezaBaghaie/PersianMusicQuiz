@@ -1,15 +1,46 @@
 let musicData = [];
 let score = 0;
 let currentTrack = null;
+let autoTransitionTimer = null; // Timer reference
 
 async function loadData() {
     const response = await fetch('data.json');
     musicData = await response.json();
-    document.getElementById('next-btn').innerText = 'نمی‌دانم';
+    
+    // Add audio ended listener
+    document.getElementById('audio-player').addEventListener('ended', handleAudioEnded);
+    
     nextQuestion();
 }
 
+function handleAudioEnded() {
+    const buttons = document.querySelectorAll('#options-container button');
+    // If buttons are not disabled, user hasn't answered
+    if (!buttons[0].disabled) {
+        showCorrectAnswer();
+        autoTransitionTimer = setTimeout(nextQuestion, 5000);
+    }
+}
+
+function showCorrectAnswer() {
+    const feedback = document.getElementById('feedback');
+    const fileName = currentTrack.file.split('/').pop().replace(/\.[^/.]+$/, "");
+    
+    // Disable buttons
+    document.querySelectorAll('#options-container button').forEach(btn => btn.disabled = true);
+    
+    feedback.innerHTML = `<p style="color: #0077B6;">دستگاه: ${currentTrack.artist}<br>${fileName}</p>`;
+    document.getElementById('next-btn').innerText = 'بعدی ▶';
+    document.getElementById('next-btn').onclick = nextQuestion;
+}
+
 function nextQuestion() {
+    // Clear timer if it's running
+    if (autoTransitionTimer) {
+        clearTimeout(autoTransitionTimer);
+        autoTransitionTimer = null;
+    }
+
     currentTrack = musicData[Math.floor(Math.random() * musicData.length)];
     const player = document.getElementById('audio-player');
     player.src = currentTrack.file;
@@ -20,7 +51,7 @@ function nextQuestion() {
     // Reset interaction UI
     const nextBtn = document.getElementById('next-btn');
     nextBtn.innerText = 'نمی‌دانم';
-    nextBtn.onclick = nextQuestion;
+    nextBtn.onclick = showCorrectAnswer; // Reveal instead of skipping
     document.getElementById('feedback').innerHTML = '';
 }
 
@@ -47,6 +78,12 @@ function renderOptions() {
 }
 
 function checkAnswer(selected) {
+    // Clear timer if user answers early
+    if (autoTransitionTimer) {
+        clearTimeout(autoTransitionTimer);
+        autoTransitionTimer = null;
+    }
+
     const feedback = document.getElementById('feedback');
     const nextBtn = document.getElementById('next-btn');
     const fileName = currentTrack.file.split('/').pop().replace(/\.[^/.]+$/, "");
