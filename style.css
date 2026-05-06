@@ -85,17 +85,31 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    justify-content: flex-start;
+    gap: 15px; /* Consistent gap between elements */
+    padding: 10px 0;
     margin-top: 0.5rem;
 }
 
 #feedback {
     font-weight: 400;
     font-family: 'Vazirmatn', sans-serif;
-    font-size: 1.3rem;
-    height: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+    min-height: 2.5rem; /* Ensure minimum space for text */
+}
+
+#next-btn {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* Options Container (Buttons) */

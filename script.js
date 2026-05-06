@@ -5,6 +5,7 @@ let currentTrack = null;
 async function loadData() {
     const response = await fetch('data.json');
     musicData = await response.json();
+    document.getElementById('next-btn').innerText = 'نمی‌دانم';
     nextQuestion();
 }
 
@@ -15,6 +16,12 @@ function nextQuestion() {
     player.play();
 
     renderOptions();
+    
+    // Reset interaction UI
+    const nextBtn = document.getElementById('next-btn');
+    nextBtn.innerText = 'نمی‌دانم';
+    nextBtn.onclick = nextQuestion;
+    document.getElementById('feedback').innerHTML = '';
 }
 
 function renderOptions() {
@@ -44,24 +51,19 @@ function checkAnswer(selected) {
     const nextBtn = document.getElementById('next-btn');
     const fileName = currentTrack.file.split('/').pop().replace(/\.[^/.]+$/, "");
     
-    // Disable other buttons
-    const buttons = document.querySelectorAll('#options-container button');
-    buttons.forEach(btn => btn.disabled = true);
+    // Disable buttons
+    document.querySelectorAll('#options-container button').forEach(btn => btn.disabled = true);
 
     if (selected === currentTrack.artist) {
         score++;
         document.getElementById('score').innerText = `امتیاز: ${score}`;
-        feedback.innerHTML = `<p style="color: green;">درست! دستگاه/آواز: ${currentTrack.artist}.<br>${fileName}</p>`;
+        feedback.innerHTML = `<p style="color: green;">درست! ${currentTrack.artist}<br>${fileName}</p>`;
     } else {
-        feedback.innerHTML = `<p style="color: red;">نادرست. دستگاه/آواز: ${currentTrack.artist}.<br>${fileName}</p>`;
+        feedback.innerHTML = `<p style="color: red;">نادرست. ${currentTrack.artist}<br>${fileName}</p>`;
     }
     
-    nextBtn.style.display = 'block';
-    nextBtn.onclick = () => {
-        nextBtn.style.display = 'none';
-        feedback.innerHTML = '';
-        nextQuestion();
-    };
+    nextBtn.innerText = 'بعدی ▶';
+    nextBtn.onclick = nextQuestion;
 }
 
 loadData();
