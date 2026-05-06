@@ -11,7 +11,7 @@ A web-based quiz application for identifying Persian musical modes (Dastgah and 
 
 ## Technical Details
 - **Frontend**: Vanilla JavaScript, HTML5 Audio API.
-- **Styling**: Vanilla CSS with CSS Grid, media queries for responsiveness, and RTL direction with optimized text rendering for Farsi.
+- **Styling**: Vanilla CSS with CSS Grid, media queries for responsiveness, and RTL direction with optimized text rendering for Farsi. Features a mobile-optimized 2x2 grid for options and compact vertical spacing to eliminate scrolling on small viewports.
 - **Fonts**: Uses `Vazirmatn` (globally) via Google Fonts.
 - **Data Format**: 
   ```json
@@ -24,6 +24,7 @@ A web-based quiz application for identifying Persian musical modes (Dastgah and 
 - **Organization**: Tracks must be placed in `tracks/{ModeName}/`.
 - **Data Entry**: Every new track must be added to `data.json` with the correct relative path and its corresponding musical mode.
 - **Persian Text**: Ensure all Dastgah/Avaz names are correctly spelled in Persian characters for consistent UI display.
+- **UI Responsiveness**: Maintain a 2x2 grid for options on mobile devices to ensure all elements fit within the viewport without scrolling.
 
 ## AI Agent Instructions
 - **Documentation Persistence**: For every change made to the codebase or application logic, the agent MUST update `GEMINI.md` to reflect the current architecture, conventions, and project structure.
